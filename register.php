@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 
 <?php
+
+include "includes/config.php";
 include "includes/classes/Account.php";
 include "includes/classes/Constants.php";
-$account = new Account();
+$account = new Account($con);
 
 include "includes/handlers/register-handler.php";
 include "includes/handlers/login-handler.php";
@@ -29,12 +31,13 @@ function getInputValue($name)
     <form action="" id="loginForm" action='register.php' method='POST'>
       <h2>Login to your account</h2>
       <p>
-      <label for="loginUserName">Username</label>
-      <input type="text" id='loginUserName' name='loginUserName' placeholder='e.g JohnDoe' required>
+        <?php echo $account->getError(Constants::$loginFailed); ?>
+        <label for="loginUsername">Username</label>
+        <input type="text" id='loginUsername' name='loginUsername' placeholder='e.g JohnDoe' value='<?php getInputValue('loginUsername')?>' required>
       </p>
       <p>
-      <label for="loginPassword">Password</label>
-      <input type="password" id='loginPassword' name='loginPassword'  required>
+        <label for="loginPassword">Password</label>
+        <input type="password" id='loginPassword' name='loginPassword' value='<?php getInputValue('loginPassword')?>' required>
       </p>
       <button type='submit' name='loginButton'>Log In</button>
     </form>
@@ -43,8 +46,9 @@ function getInputValue($name)
       <h2>Create your free account</h2>
       <p>
         <?php echo $account->getError(Constants::$usernameCharacters); ?>
-        <label for="userName">Username</label>
-        <input type="text" id='userName' name='userName' placeholder='e.g JohnDoe' value='<?php getInputValue('userName')?>' required>
+        <?php echo $account->getError(Constants::$usernameTaken); ?>
+        <label for="username">Username</label>
+        <input type="text" id='username' name='username' placeholder='e.g JohnDoe' value='<?php getInputValue('username')?>' required>
       </p>
       <p>
         <?php echo $account->getError(Constants::$firstNameCharacters); ?>
@@ -58,6 +62,7 @@ function getInputValue($name)
       </p>
       <p>
         <?php echo $account->getError(Constants::$emailInvalid); ?>
+        <?php echo $account->getError(Constants::$emailTaken); ?>
         <?php echo $account->getError(Constants::$emailsDoNotMatch); ?>
         <label for="email">Email</label>
         <input type="email" id='email' name='email' placeholder='e.g JohnDoe@gmail.com' value='<?php getInputValue('email')?>' required>
