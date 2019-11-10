@@ -47,7 +47,7 @@ body {
   height: 80vh;
   padding: 45px 45px 45px 5px;
   float: left;
-  border-right: 1px dashed rgb(122, 182, 255);
+  border-right: 1px dashed #7ab6ff;
 }
 
 #inputContainer h2 {
@@ -80,7 +80,7 @@ body {
 }
 
 #inputContainer .errorMessage {
-  color: rgb(255, 145, 145);
+  color: #ff9191;
   font-size: 12px;
   display: block;
 }
@@ -106,10 +106,10 @@ body {
 }
 #inputContainer button:hover {
   cursor: pointer;
-  box-shadow: 2px 1px 4px rgba(53, 87, 110, 0.5);
+  box-shadow: 2px 1px 4px #35576e80;
   transform: translate(-1px, -2px);
-  color: rgb(122, 182, 255);
-  border: 0.5px solid rgb(122, 182, 255);
+  color: #7ab6ff;
+  border: 0.5px solid #7ab6ff;
 }
 
 .hasAccountText {
@@ -121,7 +121,7 @@ body {
 }
 .hasAccountText span:hover {
   cursor: pointer;
-  color: rgb(122, 182, 255);
+  color: #7ab6ff;
 }
 
 #registerForm,
@@ -135,7 +135,7 @@ body {
   display: table-cell;
 }
 #loginText h1 {
-  color: rgb(122, 182, 255);
+  color: #7ab6ff;
   font-size: 60px;
   font-weight: bold;
   margin: 0;
