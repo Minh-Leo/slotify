@@ -45,6 +45,20 @@ foreach ($songIdArray as $songId) {
       <img class='play' src='assets/images/icons/play2.png'>
       <span class='number'>$i</span>
     </div>
+
+    <div class='trackInfo'>
+      <span class='trackName'>" . $albumSong->getTitle() . "</span>
+      <span class='artisName'>" . $albumArtist->getName() . "</span>
+    </div>
+
+    <div class='trackOptions'>
+      <img src='assets/images/icons/more.png' alt='' class='optionsButton'>
+    </div>
+
+    <div class='trackDuration'>
+      <span class='duration'>" . $albumSong->getDuration() . "</span>
+    </div>
+
     </li>";
 
     $i++;
