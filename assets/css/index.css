@@ -64,6 +64,7 @@ body {
 .controlButton img {
   width: 25px;
   height: 25px;
+  outline: none;
 }
 .controlButton.play img,
 .controlButton.pause img {

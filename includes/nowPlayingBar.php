@@ -1,13 +1,71 @@
+<?php
+$songQuery = mysqli_query($con, "SELECT * FROM songs ORDER BY RAND() LIMIT 10");
+$resultArray = array();
+
+while ($row = mysqli_fetch_array($songQuery)) {
+    array_push($resultArray, $row['id']);
+}
+
+$jsonArray = json_encode($resultArray);
+
+?>
+
+<script>
+
+$(document).ready(function() {
+  currentPlaylist = <?php echo $jsonArray; ?>;
+  audioElement = new Audio();
+  setTrack(currentPlaylist[0], currentPlaylist, false);
+});
+
+function setTrack(trackId, newPlaylist, play) {
+  $.post("includes/handlers/ajax/getSongJson.php", { songId: trackId }, function(data) {
+    var track = JSON.parse(data);
+    $.post("includes/handlers/ajax/getArtistJson.php", { artistId: track.artist }, function(data) {
+      var artist = JSON.parse(data);
+      $(".artistName").text(artist.name);
+    });
+    $.post("includes/handlers/ajax/getAlbumJson.php", { albumId: track.album }, function(data) {
+      var album = JSON.parse(data);
+      $(".albumArtwork").attr("src", album.artworkPath);
+    });
+    $(".trackName").text(track.title);
+
+    audioElement.setTrack(track);
+  });
+  if(play) {
+    audioElement.play();
+  }
+}
+
+function playSong() {
+  if (audioElement.audio.currentTime == 0) {
+    $.post("includes/handlers/ajax/updatePlays.php", { songId: audioElement.currentlyPlaying.id });
+  } else {
+  };
+
+  $(".play").hide();
+  $(".pause").show();
+  audioElement.play();
+}
+function pauseSong() {
+  $(".play").show();
+  $(".pause").hide();
+  audioElement.pause();
+}
+
+</script>
+
 <div id="nowPlayingBar">
 
         <div id="nowPlayingLeft">
           <div class="content">
             <span class="albumLink">
-              <img class="albumArtwork" src="https://source.unsplash.com/random/100x100" alt="">
+              <img class="albumArtwork" src="" alt="">
             </span>
             <div class="trackInfo">
-              <span class="trackName">Piano Man</span>
-              <span class="artistName">Billy Joel</span>
+              <span class="trackName"></span>
+              <span class="artistName"></span>
             </div>
           </div>
         </div>
@@ -21,10 +79,10 @@
               <button class="controlButton prev" title="Previous button">
                 <img src="assets/images/icons/prev.png" alt="Previous">
               </button>
-              <button class="controlButton play" title="Play button">
+              <button class="controlButton play" title="Play button" onclick="playSong()">
                 <img src="assets/images/icons/play.png" alt="Play">
               </button>
-              <button class="controlButton pause" title="Pause button" style="display: none">
+              <button class="controlButton pause" title="Pause button" style="display: none" onclick="pauseSong()">
                 <img src="assets/images/icons/pause.png" alt="Pause">
               </button>
               <button class="controlButton next" title="Next button">
@@ -44,7 +102,7 @@
                 </div>
               </div>
 
-              <span class="progressTime remaining">0.00</span>
+              <span class="progressTime remaining"></span>
             </div>
 
           </div>
