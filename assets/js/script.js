@@ -1,5 +1,11 @@
 var currentPlaylist = [];
+var shufflePlaylist = [];
+var tempPlaylist = [];
 var audioElement;
+var mouseDown = false;
+var currentIndex = 0;
+var repeat = false;
+var shuffle = false;
 
 function formatTime(sec) {
   var time = Math.round(sec);
@@ -20,18 +26,31 @@ function updateTimeProgressBar(audio) {
   var progress = (audio.currentTime / audio.duration) * 100;
   $(".playbackBar .progress").css("width", progress + "%");
 }
+function updateVolumeProgressBar(audio) {
+  var volume = audio.volume * 100;
+  $(".volumeBar .progress").css("width", volume + "%");
+}
 
 function Audio() {
   this.currentlyPlaying;
   this.audio = document.createElement("audio");
 
+  this.audio.addEventListener("ended", function() {
+    nextSong();
+  });
+
   this.audio.addEventListener("canplay", function() {
     $(".progressTime.remaining").text(formatTime(this.duration));
   });
+
   this.audio.addEventListener("timeupdate", function() {
     if (this.duration) {
       updateTimeProgressBar(this);
     }
+  });
+
+  this.audio.addEventListener("volumechange", function() {
+    updateVolumeProgressBar(this);
   });
 
   this.setTrack = function(track) {
@@ -45,5 +64,9 @@ function Audio() {
 
   this.pause = function() {
     this.audio.pause();
+  };
+
+  this.setTime = function(sec) {
+    this.audio.currentTime = sec;
   };
 }

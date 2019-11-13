@@ -42,7 +42,7 @@ foreach ($songIdArray as $songId) {
 
     echo "<li class='tracklistRow'>
     <div class='trackCount'>
-      <img class='play' src='assets/images/icons/play2.png'>
+      <img class='play' src='assets/images/icons/play2.png' onclick='setTrack(\"" . $albumSong->getId() . "\", tempPlaylist, true)'>
       <span class='number'>$i</span>
     </div>
 
@@ -65,6 +65,12 @@ foreach ($songIdArray as $songId) {
 
 }
 ?>
+
+<script>
+  var tempSongIds = '<?php echo json_encode($songIdArray); ?>';
+  tempPlaylist = JSON.parse(tempSongIds);
+</script>
+
   </ul>
 </div>
 
