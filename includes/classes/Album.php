@@ -20,6 +20,7 @@ class Album
         $this->artistId = $album['artist'];
         $this->genre = $album['genre'];
         $this->artworkPath = $album['artworkPath'];
+
     }
 
     public function getTitle()
@@ -50,11 +51,17 @@ class Album
 
     public function getSongIds()
     {
-        $query = mysqli_query($this->con, "SELECT id FROM songs where album='$this->id' ORDER BY albumOrder ASC");
+
+        $query = mysqli_query($this->con, "SELECT id FROM songs WHERE album='$this->id' ORDER BY albumOrder ASC");
+
         $array = array();
+
         while ($row = mysqli_fetch_array($query)) {
             array_push($array, $row['id']);
         }
+
         return $array;
+
     }
+
 }

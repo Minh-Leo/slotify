@@ -61,7 +61,7 @@ foreach ($songIdArray as $songId) {
 
     </li>";
 
-    $i++;
+    $i = $i + 1;
 
 }
 ?>

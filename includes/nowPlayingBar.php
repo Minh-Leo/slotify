@@ -1,5 +1,5 @@
 <?php
-$songQuery = mysqli_query($con, "SELECT * FROM songs ORDER BY RAND() LIMIT 10");
+$songQuery = mysqli_query($con, "SELECT id FROM songs ORDER BY RAND() LIMIT 10");
 $resultArray = array();
 
 while ($row = mysqli_fetch_array($songQuery)) {
@@ -85,17 +85,19 @@ function setTrack(trackId, newPlaylist, play) {
   pauseSong();
   $.post("includes/handlers/ajax/getSongJson.php", { songId: trackId }, function(data) {
     var track = JSON.parse(data);
+    $(".trackName span").text(track.title);
+
     $.post("includes/handlers/ajax/getArtistJson.php", { artistId: track.artist }, function(data) {
       var artist = JSON.parse(data);
-      $(".artistName").text(artist.name);
+      $(".artistName span").text(artist.name);
     });
     $.post("includes/handlers/ajax/getAlbumJson.php", { albumId: track.album }, function(data) {
       var album = JSON.parse(data);
       $(".albumArtwork").attr("src", album.artworkPath);
     });
-    $(".trackName").text(track.title);
 
     audioElement.setTrack(track);
+
   });
   if(play) {
     audioElement.play();
@@ -106,8 +108,7 @@ function setTrack(trackId, newPlaylist, play) {
 function playSong() {
   if (audioElement.audio.currentTime == 0) {
     $.post("includes/handlers/ajax/updatePlays.php", { songId: audioElement.currentlyPlaying.id });
-  } else {
-  };
+  }
 
   $(".play").hide();
   $(".pause").show();
@@ -201,8 +202,12 @@ function shuffleArray(arr) {
               <img class="albumArtwork" src="" alt="">
             </span>
             <div class="trackInfo">
-              <span class="trackName"></span>
-              <span class="artistName"></span>
+              <span class="trackName">
+                <span></span>
+              </span>
+              <span class="artistName">
+                <span></span>
+              </span>
             </div>
           </div>
         </div>
