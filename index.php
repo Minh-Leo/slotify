@@ -1,4 +1,6 @@
-<?php include "includes/header.php";?>
+<?php
+include "includes/includedFiles.php";
+?>
 
       <!-- Content main -->
           <h1 class="pageHeadingBig">You might also like</h1>
@@ -26,4 +28,4 @@ while ($row = mysqli_fetch_array($albumQuery)) {
 
       <!-- Content end -->
 
-<?php include "includes/footer.php";?>
+

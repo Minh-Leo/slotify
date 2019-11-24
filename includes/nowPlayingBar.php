@@ -135,7 +135,7 @@ function nextSong() {
   }
 
   var trackToPlay = shuffle ? shufflePlaylist[currentIndex] : currentPlaylist[currentIndex];
-  setTrack(trackToPlay, currentPlaylist, true);
+  setTrack(trackToPlay, currentPlaylist, false);
   setTimeout(() => {
     playSong();
   }, 100);
@@ -145,7 +145,7 @@ function prevSong() {
     audioElement.setTime(0);
   } else {
     currentIndex--;
-    setTrack(currentPlaylist[currentIndex], currentPlaylist, true);
+    setTrack(currentPlaylist[currentIndex], currentPlaylist, false);
     setTimeout(() => {
     playSong();
   }, 100);
