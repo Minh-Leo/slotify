@@ -219,10 +219,11 @@ body {
 
 .navBar .navItemLink {
   text-decoration: none;
-  color: #94b0da;
+  color: #7ab6ff;
 }
 .navBar .navItemLink:hover {
   color: #fff;
+  cursor: pointer;
 }
 
 /* MAIN CONTENT */
@@ -242,6 +243,12 @@ body {
   color: #0d324d;
 }
 
+.gridViewContainer {
+  color: #0d324d;
+}
+.gridViewContainer h2 {
+  text-align: center;
+}
 .gridViewItem {
   display: inline-block;
   width: 20%;
@@ -250,7 +257,7 @@ body {
   margin-right: 20px;
   margin-bottom: 20px;
 }
-.gridViewItem a {
+.gridViewItem span {
   text-decoration: none;
   color: #0d324d;
 }
@@ -273,6 +280,7 @@ body {
   padding: 40px 0 10px 0;
   display: inline-block;
   width: 100%;
+  color: #0d324d;
 }
 
 .entityInfo .leftSection {
@@ -300,6 +308,12 @@ body {
   font-weight: 400;
 }
 
+.tracklistContainer {
+  color: #0d324d;
+}
+.tracklistContainer h2 {
+  text-align: center;
+}
 .tracklist {
   padding: 0;
 }
@@ -311,6 +325,7 @@ body {
 }
 .tracklistRow:hover {
   background-color: #ddd;
+  cursor: pointer;
 }
 
 .tracklistRow span {
@@ -343,7 +358,11 @@ body {
   float: left;
 }
 .tracklistRow .trackInfo .trackName {
-  color: #94b0da;
+  color: #000;
+}
+.tracklistRow .trackInfo .artistName {
+  font-size: 12px;
+  color: #fff;
 }
 .tracklistRow .trackInfo span {
   display: block;
@@ -366,4 +385,82 @@ body {
   width: 12%;
   float: left;
   text-align: right;
+}
+
+/* ARTIST PAGE */
+.artistInfo {
+  text-align: center;
+}
+
+.button {
+  color: #fff;
+  cursor: pointer;
+  margin-bottom: 10px;
+  background-color: transparent;
+  font-weight: 500;
+  letter-spacing: 2px;
+  border: 2px solid #fff;
+  border-radius: 500px;
+  padding: 15px;
+  min-width: 130px;
+}
+.button.blue {
+  background-color: #7ab6ff;
+  border-color: #7ab6ff;
+}
+.button.blue:hover {
+  background-color: #0d324d;
+  border-color: #0d324d;
+}
+
+.borderBottom {
+  border-bottom: 1px solid #94b0da;
+  margin-bottom: 20px;
+}
+
+[role="link"] {
+  cursor: pointer;
+}
+
+/* SEARCH PAGE */
+.searchContainer {
+  background-color: #ccc;
+  padding: 20px 28px;
+}
+.searchContainer h4 {
+  margin: 0;
+  font-weight: 600;
+  color: #0d324d;
+}
+.searchContainer .searchInput {
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  color: #0d324d;
+  font-weight: 700;
+  font-size: 60px;
+  letter-spacing: 2px;
+}
+input:focus {
+  outline: 4px solid #ddd;
+}
+
+.artistsContainer h2 {
+  color: #0d324d;
+  text-align: center;
+}
+.searchResultRow {
+  padding: 15px 10px;
+}
+.searchResultRow:hover {
+  background-color: #ddd;
+}
+.searchResultRow .artistName span {
+  color: #0d324d;
+}
+
+.noResults {
+  margin: 15px;
+  display: block;
+  color: #999;
 }
