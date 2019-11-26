@@ -43,38 +43,41 @@ foreach ($songIdArray as $songId) {
     $albumArtist = $albumSong->getArtist();
 
     echo "<li class='tracklistRow'>
-    <div class='trackCount'>
-      <img class='play' src='assets/images/icons/play2.png' onclick='setTrack(\"" . $albumSong->getId() . "\", tempPlaylist, true)'>
-      <span class='number'>$i</span>
-    </div>
+      <div class='trackCount'>
+        <img class='play' src='assets/images/icons/play2.png' onclick='setTrack(\"" . $albumSong->getId() . "\", tempPlaylist, true)'>
+        <span class='number'>$i</span>
+      </div>
 
-    <div class='trackInfo'>
-      <span class='trackName'>" . $albumSong->getTitle() . "</span>
-      <span class='artisName'>" . $albumArtist->getName() . "</span>
-    </div>
+      <div class='trackInfo'>
+        <span class='trackName'>" . $albumSong->getTitle() . "</span>
+        <span class='artisName'>" . $albumArtist->getName() . "</span>
+      </div>
 
-    <div class='trackOptions'>
-      <img src='assets/images/icons/more.png' alt='' class='optionsButton'>
-    </div>
+      <div class='trackOptions'>
+        <input type='hidden' class='songId' value='" . $albumSong->getId() . "'>
+        <img src='assets/images/icons/more.png' alt='' class='optionsButton' onclick='showOptionsMenu(this)'>
+      </div>
 
-    <div class='trackDuration'>
-      <span class='duration'>" . $albumSong->getDuration() . "</span>
-    </div>
+      <div class='trackDuration'>
+        <span class='duration'>" . $albumSong->getDuration() . "</span>
+      </div>
 
-    </li>";
+      </li>";
 
     $i = $i + 1;
 
 }
 ?>
 
-<script>
-  var tempSongIds = '<?php echo json_encode($songIdArray); ?>';
-  tempPlaylist = JSON.parse(tempSongIds);
-</script>
+  <script>
+    var tempSongIds = '<?php echo json_encode($songIdArray); ?>';
+    tempPlaylist = JSON.parse(tempSongIds);
+  </script>
 
   </ul>
 </div>
 
-      <!-- Content end -->
-
+<nav class="optionsMenu">
+  <input type="hidden" class="songId">
+  <?php echo Playlist::getPlaylistsDropdown($con, $userLoggedIn->getUsername()); ?>
+</nav>

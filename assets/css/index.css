@@ -235,6 +235,7 @@ body {
 
 #mainContent {
   padding: 0 20px;
+  margin-bottom: 40px;
 }
 
 .pageHeadingBig {
@@ -404,6 +405,10 @@ body {
   padding: 15px;
   min-width: 130px;
 }
+.button:hover {
+  color: #7ab6ff;
+  border-color: #7ab6ff;
+}
 .button.blue {
   background-color: #7ab6ff;
   border-color: #7ab6ff;
@@ -463,4 +468,51 @@ input:focus {
   margin: 15px;
   display: block;
   color: #999;
+}
+
+/* PLAYLIST PAGE */
+.playlistContainer {
+  padding: 10px 0;
+}
+
+.buttonItems .button {
+  display: block;
+  margin: 0 auto 20px auto;
+}
+
+.playlistImage {
+  border: 1px solid #eee;
+  padding: 10px;
+}
+
+/* Track More button */
+.optionsMenu {
+  background-color: #ddddddbb;
+  width: 200px;
+  border: 1px solid #94b0dabb;
+  border-radius: 3px;
+  z-index: 1000;
+  display: none;
+  position: fixed;
+}
+
+.optionsMenu .item {
+  width: 100%;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  font-weight: 400;
+  color: #0d324dbb;
+  font-size: 14px;
+  height: 40px;
+  cursor: pointer;
+}
+.optionsMenu .item:hover {
+  color: #fff;
+  background-color: #94b0dabb;
+}
+
+.optionsMenu select {
+  border: none;
+  background-color: #ddddddbb;
+  /* -webkit-appearance: none; */
 }

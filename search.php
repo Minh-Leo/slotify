@@ -10,7 +10,7 @@ if (isset($_GET['term'])) {
 
 <div class="searchContainer">
   <h4>Search for an artist, album or song</h4>
-  <input type="text" value="<?php echo $term; ?>" placeholder="type here..." class="searchInput" onfocus="this.value=this.value">
+  <input type="text"  value="<?php echo $term; ?>" onfocus="this.value=this.value" placeholder="type here..." class="searchInput" >
 </div>
 
 
@@ -41,7 +41,7 @@ if (isset($_GET['term'])) {
   <?php
 $songsQuery = mysqli_query($con, "SELECT id from songs WHERE title LIKE '$term%' LIMIT 10");
 if (mysqli_num_rows($songsQuery) == 0) {
-    echo "<span class='noResults'>No songs found matching " . $term . "</span>";
+    echo "<span class='noResults'>No songs found matching '" . $term . "'</span>";
 }
 
 $songIdArray = array();
@@ -67,7 +67,8 @@ while ($row = mysqli_fetch_array($songsQuery)) {
         <span class='artistName'>" . $albumArtist->getName() . "</span>
       </div>
       <div class='trackOptions'>
-        <img src='assets/images/icons/more.png' alt='' class='optionsButton'>
+        <input type='hidden' class='songId' value='" . $albumSong->getId() . "'>
+        <img src='assets/images/icons/more.png' alt='' class='optionsButton' onclick='showOptionsMenu(this)'>
       </div>
       <div class='trackDuration'>
         <span class='duration'>" . $albumSong->getDuration() . "</span>
@@ -92,7 +93,7 @@ while ($row = mysqli_fetch_array($songsQuery)) {
   <?php
 $artistQuery = mysqli_query($con, "SELECT id FROM artists WHERE name LIKE '$term%' LIMIT 10");
 if (mysqli_num_rows($artistQuery) == 0) {
-    echo "<span class='noResults'>No artists found matching " . $term . "</span>";
+    echo "<span class='noResults'>No artists found matching '" . $term . "'</span>";
 }
 
 while ($row = mysqli_fetch_array($artistQuery)) {
@@ -116,7 +117,7 @@ while ($row = mysqli_fetch_array($artistQuery)) {
 <?php
 $albumQuery = mysqli_query($con, "SELECT * FROM albums WHERE title LIKE '$term%' LIMIT 10");
 if (mysqli_num_rows($albumQuery) == 0) {
-    echo "<span class='noResults'>No albums found matching " . $term . "</span>";
+    echo "<span class='noResults'>No albums found matching '" . $term . "'</span>";
 }
 
 while ($row = mysqli_fetch_array($albumQuery)) {
@@ -133,3 +134,8 @@ while ($row = mysqli_fetch_array($albumQuery)) {
 }
 ?>
 </div>
+
+<nav class="optionsMenu">
+  <input type="hidden" class="songId">
+  <?php echo Playlist::getPlaylistsDropdown($con, $userLoggedIn->getUsername()); ?>
+</nav>
